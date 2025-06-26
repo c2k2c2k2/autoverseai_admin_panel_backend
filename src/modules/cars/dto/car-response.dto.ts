@@ -3,91 +3,92 @@ import { CarStatus, CarType, FuelType } from '../entities/car.entity';
 import { BrandResponseDto } from '../../brands/dto/brand-response.dto';
 
 export class CarResponseDto {
-    @Expose()
-    id: string;
+  @Expose()
+  id: string;
 
-    @Expose()
-    name: string;
+  @Expose()
+  name: string;
 
-    @Expose()
-    slug: string;
+  @Expose()
+  slug: string;
 
-    @Expose()
-    description?: string;
+  @Expose()
+  description?: string;
 
-    @Expose()
-    status: CarStatus;
+  @Expose()
+  status: CarStatus;
 
-    @Expose()
-    type: CarType;
+  @Expose()
+  type: CarType;
 
-    @Expose()
-    fuelTypes: FuelType[];
+  @Expose()
+  fuelTypes: FuelType[];
 
-    @Expose()
-    launchYear?: number;
+  @Expose()
+  launchYear?: number;
 
-    @Expose()
-    discontinuedYear?: number;
+  @Expose()
+  discontinuedYear?: number;
 
-    @Expose()
-    startingPrice?: number;
+  @Expose()
+  startingPrice?: number;
 
-    @Expose()
-    currency: string;
+  @Expose()
+  currency: string;
 
-    @Expose()
-    imageUrl?: string;
+  @Expose()
+  imageUrl?: string;
 
-    @Expose()
-    imageUrls?: string[];
+  @Expose()
+  imageUrls?: string[];
 
-    @Expose()
-    sortOrder: number;
+  @Expose()
+  sortOrder: number;
 
-    @Expose()
-    specifications?: Record<string, any>;
+  @Expose()
+  specifications?: Record<string, any>;
 
-    @Expose()
-    features?: Record<string, any>;
+  @Expose()
+  features?: Record<string, any>;
 
-    @Expose()
-    createdAt: Date;
+  @Expose()
+  createdAt: Date;
 
-    @Expose()
-    updatedAt: Date;
+  @Expose()
+  updatedAt: Date;
 
-    @Expose()
-    @Type(() => BrandResponseDto)
-    brand?: BrandResponseDto;
+  @Expose()
+  @Type(() => BrandResponseDto)
+  brand?: BrandResponseDto;
 
-    @Expose()
-    get isActive(): boolean {
-        return this.status === CarStatus.ACTIVE;
-    }
+  @Expose()
+  get isActive(): boolean {
+    return this.status === CarStatus.ACTIVE;
+  }
 
-    @Expose()
-    get isDiscontinued(): boolean {
-        return this.status === CarStatus.DISCONTINUED;
-    }
+  @Expose()
+  get isDiscontinued(): boolean {
+    return this.status === CarStatus.DISCONTINUED;
+  }
 
-    @Expose()
-    get displayName(): string {
-        return `${this.brand?.name || ''} ${this.name}`.trim();
-    }
+  @Expose()
+  get displayName(): string {
+    return `${this.brand?.name || ''} ${this.name}`.trim();
+  }
 
-    @Expose()
-    get primaryImageUrl(): string {
-        return this.imageUrl || this.imageUrls?.[0] || '';
-    }
+  @Expose()
+  get primaryImageUrl(): string {
+    return this.imageUrl || this.imageUrls?.[0] || '';
+  }
 
-    // Exclude sensitive fields
-    @Exclude()
-    brandId: string;
+  // Exclude sensitive fields
+  // @Exclude()
+  @Expose()
+  brandId: string;
 
-    @Exclude()
-    metadata?: Record<string, any>;
+  @Exclude()
+  metadata?: Record<string, any>;
 
-    @Exclude()
-    deletedAt?: Date;
+  @Exclude()
+  deletedAt?: Date;
 }
