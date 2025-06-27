@@ -17,13 +17,11 @@
                 "DELETE",
                 "PATCH",
                 "OPTIONS"
-            ]
+            ],
+            "headers": {
+                "Access-Control-Allow-Origin": "*"
+            }
         }
     ],
-    "buildCommand": "npm run build",
-    "installCommand": "npm install",
-    "framework": null,
-    "regions": [
-        "iad1"
-    ]
+    "outputDirectory": "dist"
 }
