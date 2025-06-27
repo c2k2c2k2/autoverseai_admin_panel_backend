@@ -28,11 +28,10 @@ import { UpdateUserDto } from './dto/update-user.dto';
 import { FilterUsersDto } from './dto/filter-users.dto';
 import { UserResponseDto } from './dto/user-response.dto';
 import { UserStatsDto } from './dto/user-stats.dto';
-import { PaginationDto } from '../../common/dto/pagination.dto';
 import { AdminOnly } from '../../auth/decorators/admin-only.decorator';
 import { Auth } from '../../auth/decorators/auth.decorator';
 import { CurrentDbUser } from '../../auth/decorators/current-db-user.decorator';
-import { User, UserRole } from './entities/user.entity';
+import { User, UserRole, UserStatus } from './entities/user.entity';
 import { plainToInstance } from 'class-transformer';
 
 @ApiTags('Users')
@@ -71,11 +70,12 @@ export class UsersController {
     @ApiQuery({ name: 'search', required: false, type: String })
     @ApiQuery({ name: 'sortBy', required: false, type: String, example: 'createdAt' })
     @ApiQuery({ name: 'sortOrder', required: false, enum: ['ASC', 'DESC'] })
+    @ApiQuery({ name: 'role', required: false, enum: UserRole })
+    @ApiQuery({ name: 'status', required: false, enum: UserStatus })
     async findAll(
-        @Query() paginationDto: PaginationDto,
         @Query() filterDto: FilterUsersDto,
     ) {
-        const result = await this.usersService.findAll(paginationDto, filterDto);
+        const result = await this.usersService.findAll(filterDto);
 
         return {
             ...result,

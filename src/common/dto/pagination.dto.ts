@@ -22,7 +22,6 @@ export class PaginationDto {
 
     @IsOptional()
     @IsString()
-    @MinLength(1)
     @Matches(/^[a-zA-Z0-9\s]*$/, {
         message: 'Search term can only contain letters, numbers and spaces'
     })
@@ -30,7 +29,7 @@ export class PaginationDto {
 
     @IsOptional()
     @IsString()
-    @Matches(/^[a-zA-Z][a-zA-Z0-9]*$/, {
+    @Matches(/^([a-zA-Z][a-zA-Z0-9]*)?$/, {
         message: 'Sort column must start with a letter and contain only letters and numbers'
     })
     sortBy?: string;

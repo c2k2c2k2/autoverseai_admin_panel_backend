@@ -2,7 +2,7 @@ import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ThrottlerModule } from '@nestjs/throttler';
-import { APP_GUARD, APP_FILTER, APP_INTERCEPTOR, APP_PIPE } from '@nestjs/core';
+import { APP_GUARD, APP_FILTER, APP_INTERCEPTOR } from '@nestjs/core';
 
 // Configuration
 import configuration from './config/configuration';
@@ -19,13 +19,13 @@ import { CarsModule } from './modules/cars/cars.module';
 import { VariantsModule } from './modules/variants/variants.module';
 import { LicenseTypesModule } from './modules/license-types/license-types.module';
 import { LicensesModule } from './modules/licenses/licenses.module';
+import { StatsModule } from './modules/stats/stats.module';
 
-// Guards, filters, interceptors, pipes
+// Guards, filters, interceptors
 import { ClerkAuthGuard } from './auth/guards/clerk-auth.guard';
 import { AllExceptionsFilter } from './common/filters/all-exceptions.filter';
 import { ResponseInterceptor } from './common/interceptors/response.interceptor';
 import { LoggingInterceptor } from './common/interceptors/logging.interceptor';
-import { ValidationPipe } from './common/pipes/validation.pipe';
 
 @Module({
   imports: [
@@ -79,6 +79,7 @@ import { ValidationPipe } from './common/pipes/validation.pipe';
     VariantsModule,
     LicenseTypesModule,
     LicensesModule,
+    StatsModule,
   ],
   providers: [
     // Global guards
@@ -101,12 +102,6 @@ import { ValidationPipe } from './common/pipes/validation.pipe';
     {
       provide: APP_INTERCEPTOR,
       useClass: ResponseInterceptor,
-    },
-
-    // Global pipes
-    {
-      provide: APP_PIPE,
-      useClass: ValidationPipe,
     },
   ],
 })

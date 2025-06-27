@@ -13,6 +13,6 @@ export default new DataSource({
     entities: [__dirname + '/../**/*.entity{.ts,.js}'],
     migrations: [__dirname + '/../database/migrations/*{.ts,.js}'],
     synchronize: false,
-    logging: process.env.NODE_ENV === 'development',
+    logging: false,
     ssl: process.env.NODE_ENV === 'production' ? { rejectUnauthorized: false } : false,
 });

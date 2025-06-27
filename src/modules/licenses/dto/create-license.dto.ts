@@ -4,8 +4,10 @@ import {
     IsOptional,
     IsDateString,
     IsString,
+    IsNumber,
     ArrayMinSize,
     MaxLength,
+    Min,
 } from 'class-validator';
 
 export class CreateLicenseDto {
@@ -37,4 +39,14 @@ export class CreateLicenseDto {
     @IsString()
     @MaxLength(500)
     assignmentReason?: string;
+
+    @IsOptional()
+    @IsNumber()
+    @Min(0)
+    maxAccessCount?: number;
+
+    @IsOptional()
+    @IsNumber()
+    @Min(0)
+    maxDevices?: number;
 }

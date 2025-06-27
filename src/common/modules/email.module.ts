@@ -13,7 +13,7 @@ import { join } from 'path';
                 transport: {
                     host: configService.get<string>('email.host'),
                     port: configService.get<number>('email.port'),
-                    secure: false, // true for 465, false for other ports
+                    secure: configService.get<number>('email.port') === 465, // true for 465, false for other ports
                     auth: {
                         user: configService.get<string>('email.user'),
                         pass: configService.get<string>('email.pass'),

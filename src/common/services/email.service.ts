@@ -37,7 +37,7 @@ export class EmailService {
                     brands: data.brands,
                     expiresAt: data.expiresAt,
                     supportEmail: this.configService.get('email.from'),
-                    companyName: 'Your Company Name',
+                    companyName: 'Autoverse AI',
                 },
             });
 

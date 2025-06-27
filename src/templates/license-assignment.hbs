@@ -155,36 +155,24 @@
 
             <div class="brands">
                 <p><strong>Authorized Brands:</strong></p>
-                {{
-                #each
-                brands}}
+                {{#each brands}}
                 <span class="brand-tag">{{this}}</span>
-                {{
-                /each
-                }}
+                {{/each}}
             </div>
 
-            {{
-            #if
-            expiresAt}}
+            {{#if expiresAt}}
             <p><strong>Expires On:</strong> <span class="expiry">{{expiresAt}}</span></p>
             {{else}}
             <p><strong>Validity:</strong> <span style="color: #28a745;">Lifetime</span></p>
-            {{
-            /if
-            }}
+            {{/if}}
         </div>
 
         <div class="download-section">
             <h3>📱 Download Applications</h3>
             <p>Click the links below to download the application for your platform:</p>
-            {{
-            #each
-            downloadUrls}}
+            {{#each downloadUrls}}
             <a href="{{url}}" class="download-link">Download for {{platform}}</a>
-            {{
-            /each
-            }}
+            {{/each}}
         </div>
 
         <div class="warning">
@@ -193,13 +181,9 @@
                 <li>Keep your license key and password secure and confidential</li>
                 <li>Do not share your credentials with unauthorized users</li>
                 <li>You will need both the license key and password to access the application</li>
-                {{
-                #if
-                expiresAt}}
+                {{#if expiresAt}}
                 <li>This license will expire on {{expiresAt}}. Please renew before expiration</li>
-                {{
-                /if
-                }}
+                {{/if}}
             </ul>
         </div>
 

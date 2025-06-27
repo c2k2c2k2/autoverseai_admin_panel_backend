@@ -41,10 +41,18 @@ export class FilterLicensesDto extends PaginationDto {
     isExpired?: boolean;
 
     @IsOptional()
+    @Transform(({ value }) => {
+        // Return undefined for empty strings or invalid values
+        if (value === '' || value === null || value === undefined) {
+            return undefined;
+        }
+        const parsed = parseInt(value);
+        // Return undefined if parsing results in NaN
+        return isNaN(parsed) ? undefined : parsed;
+    })
     @IsNumber()
     @Min(1)
     @Max(365)
-    @Transform(({ value }) => parseInt(value))
     expiringInDays?: number;
 
     @IsOptional()

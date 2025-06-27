@@ -42,6 +42,7 @@ async function bootstrap() {
       configService.get<string>('app.frontendUrl')!,
       'http://localhost:3000',
       'http://localhost:3001',
+      'http://localhost:3002',
     ],
     credentials: true,
     methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],

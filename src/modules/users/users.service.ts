@@ -26,7 +26,7 @@ export class UsersService {
     private usersRepository: Repository<User>,
     private emailService: EmailService,
     private clerkService: ClerkService,
-  ) {}
+  ) { }
 
   async create(createUserDto: CreateUserDto): Promise<User> {
     const { email, firstName, lastName, phone, role, status } = createUserDto;
@@ -73,8 +73,7 @@ export class UsersService {
   }
 
   async findAll(
-    paginationDto: PaginationDto,
-    filterDto?: FilterUsersDto,
+    filterDto: FilterUsersDto,
   ): Promise<PaginatedResult<User>> {
     const queryBuilder = this.usersRepository
       .createQueryBuilder('user')
@@ -82,33 +81,31 @@ export class UsersService {
       .where('user.deletedAt IS NULL');
 
     // Apply filters
-    if (filterDto) {
-      if (filterDto.role) {
-        queryBuilder.andWhere('user.role = :role', { role: filterDto.role });
-      }
+    if (filterDto.role) {
+      queryBuilder.andWhere('user.role = :role', { role: filterDto.role });
+    }
 
-      if (filterDto.status) {
-        queryBuilder.andWhere('user.status = :status', {
-          status: filterDto.status,
-        });
-      }
+    if (filterDto.status) {
+      queryBuilder.andWhere('user.status = :status', {
+        status: filterDto.status,
+      });
+    }
 
-      if (filterDto.createdAfter) {
-        queryBuilder.andWhere('user.createdAt >= :createdAfter', {
-          createdAfter: filterDto.createdAfter,
-        });
-      }
+    if (filterDto.createdAfter) {
+      queryBuilder.andWhere('user.createdAt >= :createdAfter', {
+        createdAfter: filterDto.createdAfter,
+      });
+    }
 
-      if (filterDto.createdBefore) {
-        queryBuilder.andWhere('user.createdAt <= :createdBefore', {
-          createdBefore: filterDto.createdBefore,
-        });
-      }
+    if (filterDto.createdBefore) {
+      queryBuilder.andWhere('user.createdAt <= :createdBefore', {
+        createdBefore: filterDto.createdBefore,
+      });
     }
 
     // Apply search
-    if (paginationDto.search) {
-      const searchTerm = `%${paginationDto.search.toLowerCase()}%`;
+    if (filterDto.search) {
+      const searchTerm = `%${filterDto.search.toLowerCase()}%`;
       queryBuilder.andWhere(
         '(LOWER(user.email) LIKE :search OR LOWER(user.firstName) LIKE :search OR LOWER(user.lastName) LIKE :search)',
         { search: searchTerm },
@@ -116,11 +113,11 @@ export class UsersService {
     }
 
     // Apply sorting
-    const sortBy = paginationDto.sortBy || 'createdAt';
-    const sortOrder = paginationDto.sortOrder || 'DESC';
+    const sortBy = filterDto.sortBy || 'createdAt';
+    const sortOrder = filterDto.sortOrder || 'DESC';
     queryBuilder.orderBy(`user.${sortBy}`, sortOrder);
 
-    return PaginationUtil.paginate(queryBuilder, paginationDto);
+    return PaginationUtil.paginate(queryBuilder, filterDto);
   }
 
   async findOne(id: string): Promise<User> {

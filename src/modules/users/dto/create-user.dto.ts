@@ -48,6 +48,7 @@ export class CreateUserDto {
   clerkId?: string;
 
   @IsOptional()
+  @Transform(({ value }) => value === '' ? undefined : value)
   @IsUrl()
   profileImageUrl?: string;
 
