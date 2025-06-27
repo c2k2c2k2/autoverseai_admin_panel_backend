@@ -1,0 +1,55 @@
+# Dependencies
+node_modules/
+
+# Testing
+test/
+*.spec.ts
+*.spec.js
+jest.config.js
+.jest/
+
+# Development
+.env
+.env.local
+.env.development
+.env.test
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Documentation
+README.md
+VERCEL_DEPLOYMENT_GUIDE.md
+docs/
+
+# Git
+.git/
+.gitignore
+
+# Build artifacts (we'll build on Vercel)
+dist/
+build/
+
+# Database
+*.sqlite
+*.sqlite3
+src/database/seeds/
+
+# Misc
+.prettierrc
+.eslintrc*
+eslint.config.mjs
+.editorconfig
