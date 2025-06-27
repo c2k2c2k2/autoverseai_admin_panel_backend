@@ -1,0 +1,47 @@
+{
+    "version": 2,
+    "builds": [
+        {
+            "src": "api/index.ts",
+            "use": "@vercel/node"
+        }
+    ],
+    "routes": [
+        {
+            "src": "/(.*)",
+            "dest": "/api/index.ts"
+        }
+    ],
+    "env": {
+        "NODE_ENV": "production",
+        "APP_PORT": "3001",
+        "DATABASE_HOST": "@database_host",
+        "DATABASE_PORT": "@database_port",
+        "DATABASE_USERNAME": "@database_username",
+        "DATABASE_PASSWORD": "@database_password",
+        "DATABASE_NAME": "@database_name",
+        "CLERK_PUBLISHABLE_KEY": "@clerk_publishable_key",
+        "CLERK_SECRET_KEY": "@clerk_secret_key",
+        "CLERK_WEBHOOK_SECRET": "@clerk_webhook_secret",
+        "JWT_SECRET": "@jwt_secret",
+        "SMTP_HOST": "@smtp_host",
+        "SMTP_PORT": "@smtp_port",
+        "SMTP_USER": "@smtp_user",
+        "SMTP_PASS": "@smtp_pass",
+        "FROM_EMAIL": "@from_email",
+        "APP_URL": "@app_url",
+        "FRONTEND_URL": "@frontend_url"
+    },
+    "buildCommand": "npm run build",
+    "installCommand": "npm install",
+    "framework": null,
+    "regions": [
+        "iad1"
+    ],
+    "functions": {
+        "api/index.ts": {
+            "maxDuration": 30,
+            "memory": 1024
+        }
+    }
+}

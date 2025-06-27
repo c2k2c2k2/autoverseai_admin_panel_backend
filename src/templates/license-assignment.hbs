@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>License Assignment - {{companyName}}</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+
+        .container {
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #007bff;
+        }
+
+        .header h1 {
+            color: #007bff;
+            margin: 0;
+        }
+
+        .license-details {
+            background-color: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            border-left: 4px solid #28a745;
+        }
+
+        .license-key {
+            font-family: 'Courier New', monospace;
+            font-size: 18px;
+            font-weight: bold;
+            color: #007bff;
+            background-color: #e9ecef;
+            padding: 10px;
+            border-radius: 4px;
+            text-align: center;
+            margin: 10px 0;
+        }
+
+        .password {
+            font-family: 'Courier New', monospace;
+            font-size: 16px;
+            font-weight: bold;
+            color: #dc3545;
+            background-color: #f8d7da;
+            padding: 10px;
+            border-radius: 4px;
+            text-align: center;
+            margin: 10px 0;
+        }
+
+        .brands {
+            margin: 15px 0;
+        }
+
+        .brand-tag {
+            display: inline-block;
+            background-color: #007bff;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 15px;
+            margin: 3px;
+            font-size: 12px;
+        }
+
+        .download-section {
+            margin: 25px 0;
+            padding: 20px;
+            background-color: #e8f5e8;
+            border-radius: 8px;
+        }
+
+        .download-link {
+            display: inline-block;
+            background-color: #28a745;
+            color: white;
+            padding: 12px 24px;
+            text-decoration: none;
+            border-radius: 5px;
+            margin: 5px;
+            font-weight: bold;
+        }
+
+        .download-link:hover {
+            background-color: #218838;
+        }
+
+        .warning {
+            background-color: #fff3cd;
+            border: 1px solid #ffeaa7;
+            color: #856404;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 20px 0;
+        }
+
+        .expiry {
+            color: #dc3545;
+            font-weight: bold;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #ddd;
+            font-size: 12px;
+            color: #666;
+        }
+
+        .support {
+            background-color: #e3f2fd;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 20px 0;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🎉 License Assigned Successfully!</h1>
+            <p>Hello {{userName}}, your license has been activated</p>
+        </div>
+
+        <div class="license-details">
+            <h3>📄 License Information</h3>
+            <p><strong>License Type:</strong> {{licenseType}}</p>
+
+            <p><strong>License Key:</strong></p>
+            <div class="license-key">{{licenseKey}}</div>
+
+            <p><strong>Access Password:</strong></p>
+            <div class="password">{{accessPassword}}</div>
+
+            <div class="brands">
+                <p><strong>Authorized Brands:</strong></p>
+                {{#each brands}}
+                <span class="brand-tag">{{this}}</span>
+                {{/each}}
+            </div>
+
+            {{#if expiresAt}}
+            <p><strong>Expires On:</strong> <span class="expiry">{{expiresAt}}</span></p>
+            {{else}}
+            <p><strong>Validity:</strong> <span style="color: #28a745;">Lifetime</span></p>
+            {{/if}}
+        </div>
+
+        <div class="download-section">
+            <h3>📱 Download Applications</h3>
+            <p>Click the links below to download the application for your platform:</p>
+            {{#each downloadUrls}}
+            <a href="{{url}}" class="download-link">Download for {{platform}}</a>
+            {{/each}}
+        </div>
+
+        <div class="warning">
+            <h4>⚠️ Important Security Information</h4>
+            <ul>
+                <li>Keep your license key and password secure and confidential</li>
+                <li>Do not share your credentials with unauthorized users</li>
+                <li>You will need both the license key and password to access the application</li>
+                {{#if expiresAt}}
+                <li>This license will expire on {{expiresAt}}. Please renew before expiration</li>
+                {{/if}}
+            </ul>
+        </div>
+
+        <div class="support">
+            <h4>🆘 Need Help?</h4>
+            <p>If you have any questions or need assistance, please contact our support team:</p>
+            <p><strong>Email:</strong> <a href="mailto:{{supportEmail}}">{{supportEmail}}</a></p>
+        </div>
+
+        <div class="footer">
+            <p>© {{companyName}}. All rights reserved.</p>
+            <p>This is an automated email. Please do not reply to this message.</p>
+        </div>
+    </div>
+</body>
+
+</html>
