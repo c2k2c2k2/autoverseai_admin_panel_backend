@@ -4,6 +4,8 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { ThrottlerModule } from '@nestjs/throttler';
 import { APP_GUARD, APP_FILTER, APP_INTERCEPTOR } from '@nestjs/core';
 
+import { AppController } from './app.controller';  // added import
+
 // Configuration
 import configuration from './config/configuration';
 import { getDatabaseConfig } from './config/database.config';
@@ -26,6 +28,7 @@ import { ClerkAuthGuard } from './auth/guards/clerk-auth.guard';
 import { AllExceptionsFilter } from './common/filters/all-exceptions.filter';
 import { ResponseInterceptor } from './common/interceptors/response.interceptor';
 import { LoggingInterceptor } from './common/interceptors/logging.interceptor';
+import { AppService } from './app.service';
 
 @Module({
   imports: [
@@ -81,7 +84,9 @@ import { LoggingInterceptor } from './common/interceptors/logging.interceptor';
     LicensesModule,
     StatsModule,
   ],
+  controllers: [AppController],  // added controller registration
   providers: [
+    AppService,
     // Global guards
     {
       provide: APP_GUARD,
