@@ -19,10 +19,22 @@ export class ClerkAuthGuard implements CanActivate {
     ) { }
 
     async canActivate(context: ExecutionContext): Promise<boolean> {
-        // TODO: TESTING MODE - Remove this return statement to restore auth
-        return true;
+        const request = context.switchToHttp().getRequest();
 
-        /* ORIGINAL AUTH LOGIC - COMMENTED OUT FOR TESTING
+        // If auth is disabled, inject mock user from env variable
+        if (process.env.MOCK_ADMIN_USER_ID) {
+            request.user = {
+                id: process.env.MOCK_ADMIN_USER_ID,
+                email: 'mockadmin@example.com',
+                firstName: 'Mock',
+                lastName: 'Admin',
+                role: 'ADMIN',
+                isAdmin: true,
+                isActive: true,
+            };
+            return true;
+        }
+
         const isPublic = this.reflector.getAllAndOverride<boolean>(IS_PUBLIC_KEY, [
             context.getHandler(),
             context.getClass(),
@@ -32,7 +44,6 @@ export class ClerkAuthGuard implements CanActivate {
             return true;
         }
 
-        const request = context.switchToHttp().getRequest();
         const authHeader = request.headers.authorization;
 
         if (!authHeader || !authHeader.startsWith('Bearer ')) {
@@ -59,6 +70,5 @@ export class ClerkAuthGuard implements CanActivate {
             this.logger.error(`Token verification failed: ${error.message}`);
             throw new UnauthorizedException('Invalid or expired token');
         }
-        */
     }
 }

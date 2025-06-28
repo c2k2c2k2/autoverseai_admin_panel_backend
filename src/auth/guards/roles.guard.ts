@@ -20,54 +20,49 @@ export class RolesGuard implements CanActivate {
     ) { }
 
     async canActivate(context: ExecutionContext): Promise<boolean> {
-        // TODO: TESTING MODE - Remove this return statement to restore auth
-        return true;
-
-        /* ORIGINAL AUTH LOGIC - COMMENTED OUT FOR TESTING
-        const requiredRoles = this.reflector.getAllAndOverride<UserRole[]>(
-            ROLES_KEY,
-            [context.getHandler(), context.getClass()],
-        );
-
-        if (!requiredRoles) {
-            return true;
-        }
-
         const request = context.switchToHttp().getRequest();
-        const user = request.user;
 
-        if (!user) {
-            throw new ForbiddenException('User not authenticated');
-        }
+        // If auth is disabled, inject mock dbUser from env variable
+        if (process.env.MOCK_ADMIN_USER_ID) {
+            const mockUserId = process.env.MOCK_ADMIN_USER_ID;
+            try {
+                const dbUser = await this.usersService.findByClerkId(mockUserId);
 
-        try {
-            // Get user from database to check role
-            const dbUser = await this.usersService.findByClerkId(user.id);
+                if (!dbUser) {
+                    throw new ForbiddenException('Mock user not found in database');
+                }
 
-            if (!dbUser) {
-                throw new ForbiddenException('User not found in database');
-            }
+                if (!dbUser.isActive) {
+                    throw new ForbiddenException('Mock user account is not active');
+                }
 
-            if (!dbUser.isActive) {
-                throw new ForbiddenException('User account is not active');
-            }
+                request.dbUser = dbUser;
 
-            // Attach database user to request
-            request.dbUser = dbUser;
-
-            const hasRole = requiredRoles.some((role) => dbUser.role === role);
-
-            if (!hasRole) {
-                throw new ForbiddenException(
-                    `Insufficient permissions. Required roles: ${requiredRoles.join(', ')}`,
+                const requiredRoles = this.reflector.getAllAndOverride<UserRole[]>(
+                    ROLES_KEY,
+                    [context.getHandler(), context.getClass()],
                 );
-            }
 
-            return true;
-        } catch (error) {
-            this.logger.error(`Role verification failed: ${error.message}`);
-            throw new ForbiddenException('Access denied');
+                if (!requiredRoles) {
+                    return true;
+                }
+
+                const hasRole = requiredRoles.some((role) => dbUser.role === role);
+
+                if (!hasRole) {
+                    throw new ForbiddenException(
+                        `Insufficient permissions. Required roles: ${requiredRoles.join(', ')}`,
+                    );
+                }
+
+                return true;
+            } catch (error) {
+                this.logger.error(`Role verification failed: ${error.message}`);
+                throw new ForbiddenException('Access denied');
+            }
         }
-        */
+
+        // If no mock user id, deny access (since auth is disabled)
+        throw new ForbiddenException('User not authenticated');
     }
 }
