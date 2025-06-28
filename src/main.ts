@@ -87,38 +87,38 @@ async function createApp(): Promise<NestExpressApplication> {
   );
 
   // Swagger documentation (only in non-production)
-  if (nodeEnv !== 'production') {
-    const config = new DocumentBuilder()
-      .setTitle('Admin Panel API')
-      .setDescription('API documentation for the Admin Panel backend')
-      .setVersion('1.0')
-      .addBearerAuth(
-        {
-          type: 'http',
-          scheme: 'bearer',
-          bearerFormat: 'JWT',
-          name: 'JWT',
-          description: 'Enter Clerk JWT token',
-          in: 'header',
-        },
-        'JWT-auth',
-      )
-      .addTag('Authentication', 'Authentication and authorization endpoints')
-      .addTag('Users', 'User management endpoints')
-      .addTag('Brands', 'Brand management endpoints')
-      .addTag('Cars', 'Car management endpoints')
-      .addTag('Variants', 'Variant management endpoints')
-      .addTag('License Types', 'License type management endpoints')
-      .addTag('Licenses', 'License management and assignment endpoints')
-      .build();
-
-    const document = SwaggerModule.createDocument(app, config);
-    SwaggerModule.setup('api/docs', app, document, {
-      swaggerOptions: {
-        persistAuthorization: true,
+  // if (nodeEnv !== 'production') {
+  const config = new DocumentBuilder()
+    .setTitle('Admin Panel API')
+    .setDescription('API documentation for the Admin Panel backend')
+    .setVersion('1.0')
+    .addBearerAuth(
+      {
+        type: 'http',
+        scheme: 'bearer',
+        bearerFormat: 'JWT',
+        name: 'JWT',
+        description: 'Enter Clerk JWT token',
+        in: 'header',
       },
-    });
-  }
+      'JWT-auth',
+    )
+    .addTag('Authentication', 'Authentication and authorization endpoints')
+    .addTag('Users', 'User management endpoints')
+    .addTag('Brands', 'Brand management endpoints')
+    .addTag('Cars', 'Car management endpoints')
+    .addTag('Variants', 'Variant management endpoints')
+    .addTag('License Types', 'License type management endpoints')
+    .addTag('Licenses', 'License management and assignment endpoints')
+    .build();
+
+  const document = SwaggerModule.createDocument(app, config);
+  SwaggerModule.setup('api/docs', app, document, {
+    swaggerOptions: {
+      persistAuthorization: true,
+    },
+  });
+
 
   // Health check endpoint
   app.getHttpAdapter().get('/health', (req: Request, res: Response) => {
