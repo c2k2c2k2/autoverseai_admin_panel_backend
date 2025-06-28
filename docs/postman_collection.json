@@ -1,0 +1,2026 @@
+{
+    "info": {
+        "name": "AutoverseAI Admin Panel Backend API",
+        "_postman_id": "autoverseai-admin-panel-backend-collection",
+        "description": "Postman collection documenting the AutoverseAI Admin Panel Backend API endpoints.",
+        "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    },
+    "item": [
+        {
+            "name": "Licenses",
+            "description": "API endpoints for Licenses",
+            "item": [
+                {
+                    "name": "Create License",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer <token>",
+                                "type": "text"
+                            },
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json",
+                                "type": "text"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{baseUrl}}/licenses",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "licenses"
+                            ]
+                        },
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  \"licenseTypeId\": \"string\",\n  \"userId\": \"string\",\n  \"assignedBy\": \"string\",\n  \"expiryDate\": \"2024-12-31T23:59:59Z\"\n}"
+                        },
+                        "description": "Create a new license (Admin only)"
+                    }
+                },
+                {
+                    "name": "Assign License",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer <token>",
+                                "type": "text"
+                            },
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json",
+                                "type": "text"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{baseUrl}}/licenses/assign",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "licenses",
+                                "assign"
+                            ]
+                        },
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  \"email\": \"user@example.com\",\n  \"licenseTypeId\": \"string\",\n  \"assignedBy\": \"string\"\n}"
+                        },
+                        "description": "Assign license to user by email (Admin only)"
+                    }
+                },
+                {
+                    "name": "Validate License",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json",
+                                "type": "text"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{baseUrl}}/licenses/validate",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "licenses",
+                                "validate"
+                            ]
+                        },
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  \"licenseKey\": \"string\",\n  \"password\": \"string\",\n  \"deviceFingerprint\": \"string\"\n}"
+                        },
+                        "description": "Validate license access (Public endpoint for applications)"
+                    }
+                },
+                {
+                    "name": "Get All Licenses",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer <token>",
+                                "type": "text"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{baseUrl}}/licenses?page=1&limit=10&search=&sortBy=createdAt&sortOrder=ASC",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "licenses"
+                            ],
+                            "query": [
+                                {
+                                    "key": "page",
+                                    "value": "1"
+                                },
+                                {
+                                    "key": "limit",
+                                    "value": "10"
+                                },
+                                {
+                                    "key": "search",
+                                    "value": ""
+                                },
+                                {
+                                    "key": "sortBy",
+                                    "value": "createdAt"
+                                },
+                                {
+                                    "key": "sortOrder",
+                                    "value": "ASC"
+                                }
+                            ]
+                        },
+                        "description": "Get all licenses with pagination and filtering (Admin only)"
+                    }
+                },
+                {
+                    "name": "Get My Licenses",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer <token>",
+                                "type": "text"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{baseUrl}}/licenses/my-licenses?userId=",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "licenses",
+                                "my-licenses"
+                            ],
+                            "query": [
+                                {
+                                    "key": "userId",
+                                    "value": ""
+                                }
+                            ]
+                        },
+                        "description": "Get current user licenses"
+                    }
+                },
+                {
+                    "name": "Get License Stats",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer <token>",
+                                "type": "text"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{baseUrl}}/licenses/stats",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "licenses",
+                                "stats"
+                            ]
+                        },
+                        "description": "Get license statistics (Admin only)"
+                    }
+                },
+                {
+                    "name": "Get License by ID",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer <token>",
+                                "type": "text"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{baseUrl}}/licenses/:id",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "licenses",
+                                ":id"
+                            ]
+                        },
+                        "description": "Get license by ID"
+                    }
+                },
+                {
+                    "name": "Update License by ID",
+                    "request": {
+                        "method": "PATCH",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer <token>",
+                                "type": "text"
+                            },
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json",
+                                "type": "text"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{baseUrl}}/licenses/:id",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "licenses",
+                                ":id"
+                            ]
+                        },
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  \"expiryDate\": \"2024-12-31T23:59:59Z\",\n  \"status\": \"active\"\n}"
+                        },
+                        "description": "Update license by ID (Admin only)"
+                    }
+                },
+                {
+                    "name": "Activate License",
+                    "request": {
+                        "method": "PATCH",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer <token>",
+                                "type": "text"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{baseUrl}}/licenses/:id/activate",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "licenses",
+                                ":id",
+                                "activate"
+                            ]
+                        },
+                        "description": "Activate license (Admin only)"
+                    }
+                },
+                {
+                    "name": "Deactivate License",
+                    "request": {
+                        "method": "PATCH",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer <token>",
+                                "type": "text"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{baseUrl}}/licenses/:id/deactivate",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "licenses",
+                                ":id",
+                                "deactivate"
+                            ]
+                        },
+                        "description": "Deactivate license (Admin only)"
+                    }
+                },
+                {
+                    "name": "Suspend License",
+                    "request": {
+                        "method": "PATCH",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer <token>",
+                                "type": "text"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{baseUrl}}/licenses/:id/suspend",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "licenses",
+                                ":id",
+                                "suspend"
+                            ]
+                        },
+                        "description": "Suspend license (Admin only)"
+                    }
+                },
+                {
+                    "name": "Revoke License",
+                    "request": {
+                        "method": "PATCH",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer <token>",
+                                "type": "text"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{baseUrl}}/licenses/:id/revoke",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "licenses",
+                                ":id",
+                                "revoke"
+                            ]
+                        },
+                        "description": "Revoke license (Admin only)"
+                    }
+                },
+                {
+                    "name": "Delete License",
+                    "request": {
+                        "method": "DELETE",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer <token>",
+                                "type": "text"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{baseUrl}}/licenses/:id",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "licenses",
+                                ":id"
+                            ]
+                        },
+                        "description": "Delete license (soft delete, Admin only)"
+                    }
+                }
+            ]
+        },
+        {
+            "name": "Stats",
+            "description": "API endpoints for Stats",
+            "item": [
+                {
+                    "name": "Get Overview Stats",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer <token>",
+                                "type": "text"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{baseUrl}}/stats",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "stats"
+                            ]
+                        },
+                        "description": "Get overview statistics for dashboard"
+                    }
+                }
+            ]
+        },
+        {
+            "name": "License Types",
+            "description": "API endpoints for License Types",
+            "item": [
+                {
+                    "name": "Create License Type",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer <token>",
+                                "type": "text"
+                            },
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json",
+                                "type": "text"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{baseUrl}}/license-types",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "license-types"
+                            ]
+                        },
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  \"name\": \"string\",\n  \"code\": \"string\",\n  \"description\": \"string\",\n  \"sortOrder\": 0\n}"
+                        },
+                        "description": "Create a new license type"
+                    }
+                },
+                {
+                    "name": "Get All License Types",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer <token>",
+                                "type": "text"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{baseUrl}}/license-types?page=1&limit=10&search=&sortBy=sortOrder&sortOrder=ASC",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "license-types"
+                            ],
+                            "query": [
+                                {
+                                    "key": "page",
+                                    "value": "1"
+                                },
+                                {
+                                    "key": "limit",
+                                    "value": "10"
+                                },
+                                {
+                                    "key": "search",
+                                    "value": ""
+                                },
+                                {
+                                    "key": "sortBy",
+                                    "value": "sortOrder"
+                                },
+                                {
+                                    "key": "sortOrder",
+                                    "value": "ASC"
+                                }
+                            ]
+                        },
+                        "description": "Get all license types with pagination and filtering"
+                    }
+                },
+                {
+                    "name": "Get All Active License Types",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer <token>",
+                                "type": "text"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{baseUrl}}/license-types/active",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "license-types",
+                                "active"
+                            ]
+                        },
+                        "description": "Get all active license types"
+                    }
+                },
+                {
+                    "name": "Get License Type Stats",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer <token>",
+                                "type": "text"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{baseUrl}}/license-types/stats",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "license-types",
+                                "stats"
+                            ]
+                        },
+                        "description": "Get license type statistics"
+                    }
+                },
+                {
+                    "name": "Get License Type by ID",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer <token>",
+                                "type": "text"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{baseUrl}}/license-types/:id",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "license-types",
+                                ":id"
+                            ]
+                        },
+                        "description": "Get license type by ID"
+                    }
+                },
+                {
+                    "name": "Update License Type Sort Order",
+                    "request": {
+                        "method": "PATCH",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer <token>",
+                                "type": "text"
+                            },
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json",
+                                "type": "text"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{baseUrl}}/license-types/sort-order",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "license-types",
+                                "sort-order"
+                            ]
+                        },
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  \"items\": [\n    { \"id\": \"string\", \"sortOrder\": 0 }\n  ]\n}"
+                        },
+                        "description": "Update license type sort order"
+                    }
+                },
+                {
+                    "name": "Update License Type by ID",
+                    "request": {
+                        "method": "PATCH",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer <token>",
+                                "type": "text"
+                            },
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json",
+                                "type": "text"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{baseUrl}}/license-types/:id",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "license-types",
+                                ":id"
+                            ]
+                        },
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  \"name\": \"string\",\n  \"code\": \"string\",\n  \"description\": \"string\",\n  \"sortOrder\": 0\n}"
+                        },
+                        "description": "Update license type by ID"
+                    }
+                },
+                {
+                    "name": "Activate License Type",
+                    "request": {
+                        "method": "PATCH",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer <token>",
+                                "type": "text"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{baseUrl}}/license-types/:id/activate",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "license-types",
+                                ":id",
+                                "activate"
+                            ]
+                        },
+                        "description": "Activate license type"
+                    }
+                },
+                {
+                    "name": "Deactivate License Type",
+                    "request": {
+                        "method": "PATCH",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer <token>",
+                                "type": "text"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{baseUrl}}/license-types/:id/deactivate",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "license-types",
+                                ":id",
+                                "deactivate"
+                            ]
+                        },
+                        "description": "Deactivate license type"
+                    }
+                },
+                {
+                    "name": "Delete License Type",
+                    "request": {
+                        "method": "DELETE",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer <token>",
+                                "type": "text"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{baseUrl}}/license-types/:id",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "license-types",
+                                ":id"
+                            ]
+                        },
+                        "description": "Delete license type (soft delete)"
+                    }
+                }
+            ]
+        },
+        {
+            "name": "Brands",
+            "description": "API endpoints for Brands",
+            "item": [
+                {
+                    "name": "Create Brand",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer <token>",
+                                "type": "text"
+                            },
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json",
+                                "type": "text"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{baseUrl}}/brands",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "brands"
+                            ]
+                        },
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  \"name\": \"string\",\n  \"description\": \"string\",\n  \"sortOrder\": 0\n}"
+                        },
+                        "description": "Create a new brand"
+                    }
+                },
+                {
+                    "name": "Get All Brands",
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                            "raw": "{{baseUrl}}/brands?page=1&limit=10&search=&sortBy=sortOrder&sortOrder=ASC",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "brands"
+                            ],
+                            "query": [
+                                {
+                                    "key": "page",
+                                    "value": "1"
+                                },
+                                {
+                                    "key": "limit",
+                                    "value": "10"
+                                },
+                                {
+                                    "key": "search",
+                                    "value": ""
+                                },
+                                {
+                                    "key": "sortBy",
+                                    "value": "sortOrder"
+                                },
+                                {
+                                    "key": "sortOrder",
+                                    "value": "ASC"
+                                }
+                            ]
+                        },
+                        "description": "Get all brands with pagination and filtering"
+                    }
+                },
+                {
+                    "name": "Get All Active Brands",
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                            "raw": "{{baseUrl}}/brands/active",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "brands",
+                                "active"
+                            ]
+                        },
+                        "description": "Get all active brands"
+                    }
+                },
+                {
+                    "name": "Get Brand Stats",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer <token>",
+                                "type": "text"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{baseUrl}}/brands/stats",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "brands",
+                                "stats"
+                            ]
+                        },
+                        "description": "Get brand statistics"
+                    }
+                },
+                {
+                    "name": "Get Brand by Slug",
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                            "raw": "{{baseUrl}}/brands/slug/:slug",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "brands",
+                                "slug",
+                                ":slug"
+                            ]
+                        },
+                        "description": "Get brand by slug"
+                    }
+                },
+                {
+                    "name": "Get Brand by ID",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer <token>",
+                                "type": "text"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{baseUrl}}/brands/:id",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "brands",
+                                ":id"
+                            ]
+                        },
+                        "description": "Get brand by ID"
+                    }
+                },
+                {
+                    "name": "Update Brand Sort Order",
+                    "request": {
+                        "method": "PATCH",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer <token>",
+                                "type": "text"
+                            },
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json",
+                                "type": "text"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{baseUrl}}/brands/sort-order",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "brands",
+                                "sort-order"
+                            ]
+                        },
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  \"items\": [\n    { \"id\": \"string\", \"sortOrder\": 0 }\n  ]\n}"
+                        },
+                        "description": "Update brand sort order"
+                    }
+                },
+                {
+                    "name": "Update Brand by ID",
+                    "request": {
+                        "method": "PATCH",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer <token>",
+                                "type": "text"
+                            },
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json",
+                                "type": "text"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{baseUrl}}/brands/:id",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "brands",
+                                ":id"
+                            ]
+                        },
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  \"name\": \"string\",\n  \"description\": \"string\",\n  \"sortOrder\": 0\n}"
+                        },
+                        "description": "Update brand by ID"
+                    }
+                },
+                {
+                    "name": "Activate Brand",
+                    "request": {
+                        "method": "PATCH",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer <token>",
+                                "type": "text"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{baseUrl}}/brands/:id/activate",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "brands",
+                                ":id",
+                                "activate"
+                            ]
+                        },
+                        "description": "Activate brand"
+                    }
+                },
+                {
+                    "name": "Deactivate Brand",
+                    "request": {
+                        "method": "PATCH",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer <token>",
+                                "type": "text"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{baseUrl}}/brands/:id/deactivate",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "brands",
+                                ":id",
+                                "deactivate"
+                            ]
+                        },
+                        "description": "Deactivate brand"
+                    }
+                },
+                {
+                    "name": "Delete Brand",
+                    "request": {
+                        "method": "DELETE",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer <token>",
+                                "type": "text"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{baseUrl}}/brands/:id",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "brands",
+                                ":id"
+                            ]
+                        },
+                        "description": "Delete brand (soft delete)"
+                    }
+                }
+            ]
+        },
+        {
+            "name": "Cars",
+            "description": "API endpoints for Cars",
+            "item": [
+                {
+                    "name": "Create Car",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer <token>",
+                                "type": "text"
+                            },
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json",
+                                "type": "text"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{baseUrl}}/cars",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "cars"
+                            ]
+                        },
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  \"brandId\": \"string\",\n  \"name\": \"string\",\n  \"description\": \"string\",\n  \"sortOrder\": 0\n}"
+                        },
+                        "description": "Create a new car"
+                    }
+                },
+                {
+                    "name": "Get All Cars",
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                            "raw": "{{baseUrl}}/cars?page=1&limit=10&search=&sortBy=sortOrder&sortOrder=ASC",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "cars"
+                            ],
+                            "query": [
+                                {
+                                    "key": "page",
+                                    "value": "1"
+                                },
+                                {
+                                    "key": "limit",
+                                    "value": "10"
+                                },
+                                {
+                                    "key": "search",
+                                    "value": ""
+                                },
+                                {
+                                    "key": "sortBy",
+                                    "value": "sortOrder"
+                                },
+                                {
+                                    "key": "sortOrder",
+                                    "value": "ASC"
+                                }
+                            ]
+                        },
+                        "description": "Get all cars with pagination and filtering"
+                    }
+                },
+                {
+                    "name": "Get All Active Cars",
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                            "raw": "{{baseUrl}}/cars/active",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "cars",
+                                "active"
+                            ]
+                        },
+                        "description": "Get all active cars"
+                    }
+                },
+                {
+                    "name": "Get Cars by Brand",
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                            "raw": "{{baseUrl}}/cars/brand/:brandId",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "cars",
+                                "brand",
+                                ":brandId"
+                            ]
+                        },
+                        "description": "Get all cars by brand"
+                    }
+                },
+                {
+                    "name": "Get Car by Brand and Slug",
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                            "raw": "{{baseUrl}}/cars/brand/:brandId/slug/:slug",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "cars",
+                                "brand",
+                                ":brandId",
+                                "slug",
+                                ":slug"
+                            ]
+                        },
+                        "description": "Get car by brand and slug"
+                    }
+                },
+                {
+                    "name": "Get Car by ID",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer <token>",
+                                "type": "text"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{baseUrl}}/cars/:id",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "cars",
+                                ":id"
+                            ]
+                        },
+                        "description": "Get car by ID"
+                    }
+                },
+                {
+                    "name": "Update Car Sort Order",
+                    "request": {
+                        "method": "PATCH",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer <token>",
+                                "type": "text"
+                            },
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json",
+                                "type": "text"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{baseUrl}}/cars/brand/:brandId/sort-order",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "cars",
+                                "brand",
+                                ":brandId",
+                                "sort-order"
+                            ]
+                        },
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  \"items\": [\n    { \"id\": \"string\", \"sortOrder\": 0 }\n  ]\n}"
+                        },
+                        "description": "Update car sort order within brand"
+                    }
+                },
+                {
+                    "name": "Update Car by ID",
+                    "request": {
+                        "method": "PATCH",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer <token>",
+                                "type": "text"
+                            },
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json",
+                                "type": "text"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{baseUrl}}/cars/:id",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "cars",
+                                ":id"
+                            ]
+                        },
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  \"brandId\": \"string\",\n  \"name\": \"string\",\n  \"description\": \"string\",\n  \"sortOrder\": 0\n}"
+                        },
+                        "description": "Update car by ID"
+                    }
+                },
+                {
+                    "name": "Activate Car",
+                    "request": {
+                        "method": "PATCH",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer <token>",
+                                "type": "text"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{baseUrl}}/cars/:id/activate",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "cars",
+                                ":id",
+                                "activate"
+                            ]
+                        },
+                        "description": "Activate car"
+                    }
+                },
+                {
+                    "name": "Deactivate Car",
+                    "request": {
+                        "method": "PATCH",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer <token>",
+                                "type": "text"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{baseUrl}}/cars/:id/deactivate",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "cars",
+                                ":id",
+                                "deactivate"
+                            ]
+                        },
+                        "description": "Deactivate car"
+                    }
+                },
+                {
+                    "name": "Discontinue Car",
+                    "request": {
+                        "method": "PATCH",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer <token>",
+                                "type": "text"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{baseUrl}}/cars/:id/discontinue",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "cars",
+                                ":id",
+                                "discontinue"
+                            ]
+                        },
+                        "description": "Discontinue car"
+                    }
+                },
+                {
+                    "name": "Delete Car",
+                    "request": {
+                        "method": "DELETE",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer <token>",
+                                "type": "text"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{baseUrl}}/cars/:id",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "cars",
+                                ":id"
+                            ]
+                        },
+                        "description": "Delete car (soft delete)"
+                    }
+                }
+            ]
+        },
+        {
+            "name": "Users",
+            "description": "API endpoints for Users",
+            "item": [
+                {
+                    "name": "Create User",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer <token>",
+                                "type": "text"
+                            },
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json",
+                                "type": "text"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{baseUrl}}/users",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "users"
+                            ]
+                        },
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  \"email\": \"user@example.com\",\n  \"password\": \"string\",\n  \"firstName\": \"string\",\n  \"lastName\": \"string\",\n  \"role\": \"string\"\n}"
+                        },
+                        "description": "Create a new user"
+                    }
+                },
+                {
+                    "name": "Get All Users",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer <token>",
+                                "type": "text"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{baseUrl}}/users?page=1&limit=10&search=&sortBy=createdAt&sortOrder=ASC",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "users"
+                            ],
+                            "query": [
+                                {
+                                    "key": "page",
+                                    "value": "1"
+                                },
+                                {
+                                    "key": "limit",
+                                    "value": "10"
+                                },
+                                {
+                                    "key": "search",
+                                    "value": ""
+                                },
+                                {
+                                    "key": "sortBy",
+                                    "value": "createdAt"
+                                },
+                                {
+                                    "key": "sortOrder",
+                                    "value": "ASC"
+                                },
+                                {
+                                    "key": "role",
+                                    "value": ""
+                                },
+                                {
+                                    "key": "status",
+                                    "value": ""
+                                }
+                            ]
+                        },
+                        "description": "Get all users with pagination and filtering"
+                    }
+                },
+                {
+                    "name": "Get User Stats",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer <token>",
+                                "type": "text"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{baseUrl}}/users/stats",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "users",
+                                "stats"
+                            ]
+                        },
+                        "description": "Get user statistics"
+                    }
+                },
+                {
+                    "name": "Get Current User Profile",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer <token>",
+                                "type": "text"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{baseUrl}}/users/me",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "users",
+                                "me"
+                            ]
+                        },
+                        "description": "Get current user profile"
+                    }
+                },
+                {
+                    "name": "Update Current User Profile",
+                    "request": {
+                        "method": "PATCH",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer <token>",
+                                "type": "text"
+                            },
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json",
+                                "type": "text"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{baseUrl}}/users/me",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "users",
+                                "me"
+                            ]
+                        },
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  \"firstName\": \"string\",\n  \"lastName\": \"string\"\n}"
+                        },
+                        "description": "Update current user profile"
+                    }
+                },
+                {
+                    "name": "Get User by ID",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer <token>",
+                                "type": "text"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{baseUrl}}/users/:id",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "users",
+                                ":id"
+                            ]
+                        },
+                        "description": "Get user by ID"
+                    }
+                },
+                {
+                    "name": "Update User by ID",
+                    "request": {
+                        "method": "PATCH",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer <token>",
+                                "type": "text"
+                            },
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json",
+                                "type": "text"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{baseUrl}}/users/:id",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "users",
+                                ":id"
+                            ]
+                        },
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  \"email\": \"user@example.com\",\n  \"firstName\": \"string\",\n  \"lastName\": \"string\",\n  \"role\": \"string\",\n  \"status\": \"string\"\n}"
+                        },
+                        "description": "Update user by ID"
+                    }
+                },
+                {
+                    "name": "Activate User Account",
+                    "request": {
+                        "method": "PATCH",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer <token>",
+                                "type": "text"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{baseUrl}}/users/:id/activate",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "users",
+                                ":id",
+                                "activate"
+                            ]
+                        },
+                        "description": "Activate user account"
+                    }
+                },
+                {
+                    "name": "Deactivate User Account",
+                    "request": {
+                        "method": "PATCH",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer <token>",
+                                "type": "text"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{baseUrl}}/users/:id/deactivate",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "users",
+                                ":id",
+                                "deactivate"
+                            ]
+                        },
+                        "description": "Deactivate user account"
+                    }
+                },
+                {
+                    "name": "Delete User",
+                    "request": {
+                        "method": "DELETE",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer <token>",
+                                "type": "text"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{baseUrl}}/users/:id",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "users",
+                                ":id"
+                            ]
+                        },
+                        "description": "Delete user (soft delete)"
+                    }
+                }
+            ]
+        },
+        {
+            "name": "Variants",
+            "description": "API endpoints for Variants",
+            "item": [
+                {
+                    "name": "Create Variant",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer <token>",
+                                "type": "text"
+                            },
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json",
+                                "type": "text"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{baseUrl}}/variants",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "variants"
+                            ]
+                        },
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  \"carId\": \"string\",\n  \"name\": \"string\",\n  \"description\": \"string\",\n  \"stockQuantity\": 0,\n  \"sortOrder\": 0\n}"
+                        },
+                        "description": "Create a new variant"
+                    }
+                },
+                {
+                    "name": "Get All Variants",
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                            "raw": "{{baseUrl}}/variants?page=1&limit=10&search=&sortBy=sortOrder&sortOrder=ASC",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "variants"
+                            ],
+                            "query": [
+                                {
+                                    "key": "page",
+                                    "value": "1"
+                                },
+                                {
+                                    "key": "limit",
+                                    "value": "10"
+                                },
+                                {
+                                    "key": "search",
+                                    "value": ""
+                                },
+                                {
+                                    "key": "sortBy",
+                                    "value": "sortOrder"
+                                },
+                                {
+                                    "key": "sortOrder",
+                                    "value": "ASC"
+                                }
+                            ]
+                        },
+                        "description": "Get all variants with pagination and filtering"
+                    }
+                },
+                {
+                    "name": "Get All Active Variants",
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                            "raw": "{{baseUrl}}/variants/active",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "variants",
+                                "active"
+                            ]
+                        },
+                        "description": "Get all active variants"
+                    }
+                },
+                {
+                    "name": "Get Variant Stats",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer <token>",
+                                "type": "text"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{baseUrl}}/variants/stats",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "variants",
+                                "stats"
+                            ]
+                        },
+                        "description": "Get variant statistics"
+                    }
+                },
+                {
+                    "name": "Get Variants by Brand",
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                            "raw": "{{baseUrl}}/variants/brand/:brandId",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "variants",
+                                "brand",
+                                ":brandId"
+                            ]
+                        },
+                        "description": "Get all variants by brand"
+                    }
+                },
+                {
+                    "name": "Get Variants by Car",
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                            "raw": "{{baseUrl}}/variants/car/:carId",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "variants",
+                                "car",
+                                ":carId"
+                            ]
+                        },
+                        "description": "Get all variants by car"
+                    }
+                },
+                {
+                    "name": "Get Variant by ID",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer <token>",
+                                "type": "text"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{baseUrl}}/variants/:id",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "variants",
+                                ":id"
+                            ]
+                        },
+                        "description": "Get variant by ID"
+                    }
+                },
+                {
+                    "name": "Update Variant Sort Order",
+                    "request": {
+                        "method": "PATCH",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer <token>",
+                                "type": "text"
+                            },
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json",
+                                "type": "text"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{baseUrl}}/variants/car/:carId/sort-order",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "variants",
+                                "car",
+                                ":carId",
+                                "sort-order"
+                            ]
+                        },
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  \"items\": [\n    { \"id\": \"string\", \"sortOrder\": 0 }\n  ]\n}"
+                        },
+                        "description": "Update variant sort order within car"
+                    }
+                },
+                {
+                    "name": "Update Variant by ID",
+                    "request": {
+                        "method": "PATCH",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer <token>",
+                                "type": "text"
+                            },
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json",
+                                "type": "text"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{baseUrl}}/variants/:id",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "variants",
+                                ":id"
+                            ]
+                        },
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  \"carId\": \"string\",\n  \"name\": \"string\",\n  \"description\": \"string\",\n  \"stockQuantity\": 0,\n  \"sortOrder\": 0\n}"
+                        },
+                        "description": "Update variant by ID"
+                    }
+                },
+                {
+                    "name": "Update Variant Stock Quantity",
+                    "request": {
+                        "method": "PATCH",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer <token>",
+                                "type": "text"
+                            },
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json",
+                                "type": "text"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{baseUrl}}/variants/:id/stock",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "variants",
+                                ":id",
+                                "stock"
+                            ]
+                        },
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  \"stockQuantity\": 0\n}"
+                        },
+                        "description": "Update variant stock quantity"
+                    }
+                },
+                {
+                    "name": "Activate Variant",
+                    "request": {
+                        "method": "PATCH",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer <token>",
+                                "type": "text"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{baseUrl}}/variants/:id/activate",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "variants",
+                                ":id",
+                                "activate"
+                            ]
+                        },
+                        "description": "Activate variant"
+                    }
+                },
+                {
+                    "name": "Deactivate Variant",
+                    "request": {
+                        "method": "PATCH",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer <token>",
+                                "type": "text"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{baseUrl}}/variants/:id/deactivate",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "variants",
+                                ":id",
+                                "deactivate"
+                            ]
+                        },
+                        "description": "Deactivate variant"
+                    }
+                },
+                {
+                    "name": "Discontinue Variant",
+                    "request": {
+                        "method": "PATCH",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer <token>",
+                                "type": "text"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{baseUrl}}/variants/:id/discontinue",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "variants",
+                                ":id",
+                                "discontinue"
+                            ]
+                        },
+                        "description": "Discontinue variant"
+                    }
+                },
+                {
+                    "name": "Delete Variant",
+                    "request": {
+                        "method": "DELETE",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer <token>",
+                                "type": "text"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{baseUrl}}/variants/:id",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "variants",
+                                ":id"
+                            ]
+                        },
+                        "description": "Delete variant (soft delete)"
+                    }
+                }
+            ]
+        }
+    ]
+}
