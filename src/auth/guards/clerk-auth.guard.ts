@@ -19,6 +19,10 @@ export class ClerkAuthGuard implements CanActivate {
     ) { }
 
     async canActivate(context: ExecutionContext): Promise<boolean> {
+        // TODO: TESTING MODE - Remove this return statement to restore auth
+        return true;
+
+        /* ORIGINAL AUTH LOGIC - COMMENTED OUT FOR TESTING
         const isPublic = this.reflector.getAllAndOverride<boolean>(IS_PUBLIC_KEY, [
             context.getHandler(),
             context.getClass(),
@@ -55,5 +59,6 @@ export class ClerkAuthGuard implements CanActivate {
             this.logger.error(`Token verification failed: ${error.message}`);
             throw new UnauthorizedException('Invalid or expired token');
         }
+        */
     }
 }

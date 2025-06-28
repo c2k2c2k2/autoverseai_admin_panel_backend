@@ -5,7 +5,7 @@ import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 import { NestExpressApplication } from '@nestjs/platform-express';
 import { ExpressAdapter } from '@nestjs/platform-express';
 import helmet from 'helmet';
-import * as compression from 'compression';
+const compression = require("compression")
 import { Request, Response } from 'express';
 import express from 'express';
 
